@@ -1,0 +1,325 @@
+//Student Register Number :- IT21357008
+//Student Name :- S.K.N.C.Karunanayaka
+
+
+//Bi-directional Association between the Seller and Property.
+//Seller can publish one or more property. Property belongs to only one Seller.
+
+#include<iostream>
+#include<string>
+#define SIZE 10
+
+using namespace std;
+
+class Seller;
+class Property;
+
+//Class Seller
+class Seller {
+	private:
+		string seller_userFName;
+		string seller_userLName;
+		string seller_email;
+		string seller_contNumber;
+		//Bi-directional association with Property
+		Property *property[SIZE];
+		int noOfProperty;
+	public:
+		//constructor1
+		Seller();
+		//constructor2
+		Seller(string pseller_userFName, string pseller_userLName, string pseller_email, string pseller_contNumber);
+		void addProperty(Property *P);
+		//Display seller details 
+		void displaySeller();
+		//Destructor
+		~Seller(){
+			cout<<"Deleting Seller"<<endl<<endl;
+		}
+};
+//class Property
+class Property {
+	private:
+		string pro_id;
+		string pro_type;
+		string pro_name;
+		string pro_price;
+		string pro_location;
+		string pro_description;
+		//Bi-directional association with Seller
+		Seller *S;
+		
+		public:
+			//Constructor
+			Property(string ppro_id, string ppro_type, string ppro_name, string ppro_price, string ppro_location, string ppro_description, Seller *pS);
+			//Desplay payment Details of Seller
+			void displayProperty();
+			//Destructor
+			~Property(){
+				cout<<"Deleting Property"<<endl<<endl;
+			}
+};
+
+Property::Property(string ppro_id, string ppro_type, string ppro_name, string ppro_price, string ppro_location, string ppro_description, Seller *pS)
+{
+	pro_id = ppro_id;
+	pro_type = ppro_type;
+	pro_name = ppro_name;
+	pro_price = ppro_price;
+	pro_location = ppro_location;
+	pro_description = ppro_description;
+	S = pS;
+	S->addProperty(this);
+}
+
+void Property::displayProperty()
+{	cout<<"**************************************************"<<endl;
+	cout<<" Property Details of the seller mentioned above >>"<<endl<<endl;
+	cout<<"Proprty ID : "<< pro_id <<endl;
+	cout<<"Proprty Type : "<< pro_type <<endl;
+	cout<<"Proprty Name : "<< pro_name <<endl;
+	cout<<"Proprty Price : "<< pro_price <<endl;
+	cout<<"Proprty Location : "<< pro_location <<endl;
+	cout<<"Proprty Description : "<< pro_description <<endl;
+}
+
+Seller::Seller(string pseller_userFName, string pseller_userLName, string pseller_email, string pseller_contNumber)
+{
+	seller_userFName = pseller_userFName;
+	seller_userLName = pseller_userLName;
+	seller_email = pseller_email;
+	seller_contNumber = pseller_contNumber;
+	noOfProperty= 0;
+}
+
+void Seller::addProperty(Property *P)
+{
+	if(noOfProperty < SIZE){
+		property[noOfProperty] = P;
+		noOfProperty++;	
+	}
+}
+
+void Seller::displaySeller()
+{
+	cout<< " Seller First Name :  "<<seller_userFName<<endl;
+	cout<< " Seller Last Name :  "<<seller_userLName<<endl;
+	cout<< " Seller Email Address :  "<<seller_email<<endl;
+	cout<< " Seller Contact Number:  "<<seller_contNumber<<endl<<endl;
+	
+	for(int i = 0; i < noOfProperty; i++)
+	{
+		property[i]->displayProperty();
+	}
+	
+}
+
+int main()
+{
+	//Bi-directional association of Seller and Property
+	char sp;
+	Seller *S1= new Seller("Nuwan","Ekanayaka","nuwaeka@gmail.com", "0712356237");
+	Seller *S2= new Seller("Sugath","Aravindha","sugaravi@gmail.com","0776767678");
+	
+	Property *P1= new Property("L001","Land","Land for sale Gampaha","LKR 1700000","Gampaha","50 perch , Pure freehold deeds , Plumbing and well water , SLT cable phone facilities , Electricity" , S1);
+	Property *P2= new Property("H003","Home","Home for sale in Kandy","LKR 7500000","Kandy","20 Perch, 4 rooms,living room, dining room, kitchen, 2 attached bathrooms",S1);
+		cout<<"**************************************************"<<endl;
+		cout<<" Properties of >>" <<endl;
+		S1->displaySeller();
+		cin>>sp;
+	delete S1;
+	delete P1;	
+	return 0;
+}//end of bi-directional association
+
+
+
+
+
+
+//Uni-directional association between the Payment and PaymentMethod
+//Payment has One or more Payment Method
+
+#include<iostream>
+#include<string>
+
+using namespace std;
+//class of PaymentMethod
+class PaymentMethod{
+	private:
+		string payMethod_id;
+		string payMethod_type;
+		public:
+			//Constructor1
+			PaymentMethod();
+			//Constructor2
+			PaymentMethod(string ppayMethod_id, string ppayMethod_type)
+			{
+				payMethod_id = ppayMethod_id;
+				payMethod_type = ppayMethod_type;
+			}
+			//Display Payment Method Details
+			void displayDetails()
+			{
+				cout<<"Payment Method ID : "<<payMethod_id<<endl;
+				cout<<"Payment Method Type : "<<payMethod_type<<endl;
+			}
+			//destructor
+			~PaymentMethod(){
+				cout<<"Delete Payment Method"<<endl;
+			}
+};
+
+//Class of Payment
+class Payment{
+	private:
+		string pay_id;
+		string pay_type;
+		string pay_ammount;
+		PaymentMethod *pymd;//an object of PaymentMethod as attribute
+		
+	public:
+		//constructor
+		Payment(string ppay_id, string ppay_type, string ppay_ammount, PaymentMethod *pm)
+		{
+			pay_id = ppay_id;
+			pay_type = ppay_type;
+			pay_ammount = ppay_ammount;
+				pymd = pm;
+		}
+		//Details of Payment
+		void displayDetails()
+		{
+			cout<<"Payment ID : "<<pay_id<<endl;
+			cout<<"Payment Type : "<<pay_type<<endl;
+			cout<<"Payment Ammount : "<<pay_ammount<<endl;
+			pymd->displayDetails();
+		}
+		//Destructor
+		~Payment(){
+			cout<<"Delete Payment"<<endl;
+		}
+};
+
+
+int main()
+{
+	//uni-directional association of Payment and PaymentMethod
+	char pp;
+	PaymentMethod *pm = new PaymentMethod("CD001","Credit and Debit");
+	pm->displayDetails();
+	cout<<"**************************************"<<endl;
+	Payment *p = new Payment("P2","Property Payment","LKR 2500000",pm);
+	p->displayDetails();
+	delete p;
+	delete pm;
+	cin>>pp;
+	
+	return 0;
+}//end of uni-directional Association
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Inheritance between PaymentMethod and Credit 
+//Two Kind-of payment method
+
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+class PaymentMethod{
+	protected:
+		char  payMethod_id[20];//CD001,CD002,PYPL001,PYPL002
+		char payMethod_type[20];//Credit and Debit, Pay Pal
+		public:
+			//default Constructor
+			PaymentMethod()
+			{
+				cout<<"PaymentMethod Default Constructor Called"<<endl<<endl;
+			}
+			//Overload Constructor
+			PaymentMethod(char ppayMethod_id[],char ppayMethod_type[])
+			{
+				cout<<"PaymentMethod Overload Constructor Called"<<endl<<endl;
+				//Setting values
+				strcpy(payMethod_id,ppayMethod_id);
+				strcpy(payMethod_type,ppayMethod_type);
+			}
+			//Display Payment Method Details
+			void displayDetails()
+			{
+				cout<<"Payment Method ID : "<<payMethod_id<<endl;
+				cout<<"Payment Method Type : "<<payMethod_type<<endl<<endl;
+			}
+			//destructor01
+			~PaymentMethod(){
+				cout<<"Delete PaymentMethod Default Constructor "<<endl<<endl;
+			}
+			
+};
+
+class CreditDebit : public PaymentMethod{
+	protected:
+		string card_type;
+		string card_number;
+		string card_holderName;
+		string validityPeriod;
+		int cvv;
+	public:
+		CreditDebit(){
+			cout<<"CreditDebit Default Constructor Called"<<endl<<endl;
+		}
+		CreditDebit(char ppayMethod_id[],char ppayMethod_type[],string pcard_type, string pcard_number, string pcard_holderName, string pvalidityPeriod, int pcvv)
+		
+	{
+		
+			cout<<"This is CreditDebit class."<<" "<<"derived class from PaymentMethod"<<endl<<endl;
+		
+			card_type = pcard_type;
+			card_number = pcard_number;
+			card_holderName = pcard_holderName;
+			validityPeriod = pvalidityPeriod;
+			cvv = pcvv;
+	}
+		void displayDetails(){
+			cout<<" Card Type : "<<card_type<<endl;
+			cout<<" Card Number : "<<card_number<<endl;
+			cout<<" Card Holder Name : "<<card_holderName<<endl;
+			cout<<" Card Validity Period : "<<validityPeriod<<endl;
+			cout<<" Card CVV : "<<cvv<<endl<<endl;
+		}
+		~CreditDebit(){
+			cout<<"Delete CreditDebit Default Constructor "<<endl<<endl;
+		}
+};
+
+int main(){
+	PaymentMethod PM1; //PaymentMethod default constructor called
+	PaymentMethod PM2("PYPL001","Pay Pal"); //PaymentMethod overload constroucter called
+	PM2.displayDetails();
+	
+	
+	CreditDebit myCard1;//CreditDebit default constructor called
+	CreditDebit myCard2("CD001","Credit and Debit","Mastercard","2234567854326789","KUMARASIRI JAGATH","09/26",267);//CreditDebit overload constructor called
+	myCard2.displayDetails();
+	myCard1.~CreditDebit();//creditDebit destructor called
+	
+	return 0;
+}
