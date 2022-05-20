@@ -1,0 +1,78 @@
+//IT21575044
+//Class for Report
+Class Report{
+
+private:
+string advertisementnum ;
+string appointmentnum ;
+
+
+public:
+
+void advertisementReport();
+void getAdvertisementDetails() ;
+void appointmentReport() ;
+void getAppointmentDetails() ;
+void propertyReport() ;
+void getPropertyDetails() ;
+
+};
+
+void Report :: getAdvertisementDetails(Advertisement *A){
+details = P-> getDetails() ;
+}
+
+void Report :: getAppointmentDetails(Appointment *Q){
+details = Q-> getDetails() ;
+}
+
+getPropertyDetails(Property *P)
+{
+details = P-> getDetails() ;
+}
+
+
+
+
+//Class for Appointment
+Class Appointment{
+
+private:
+string appointmentnum ;
+string buyer_username ;
+string seller_username ;
+
+
+public:
+
+void scheduleAppointment(Seller *S);
+void scheduleAppointment((Buyer *B);
+void getAppointmentDetails(Appointment *Q) ;
+
+};
+
+
+#include <iostream>
+using namespace std ;
+
+int main () {
+
+string advertisementnum ;
+string appointmentnum ;
+string buyer_username ;
+string seller_username ;
+
+Report R1 , R2 ;
+Appointment A ;
+
+R1.getAdvertisementDetails(string advertisementnum) ;
+R1.advertisementReport();
+
+R2.getAppointmentDetails(string appointmentnum) ;
+R2.appointmentReport();
+
+
+A.scheduleAppointment() ;
+
+return 0 ;
+}
