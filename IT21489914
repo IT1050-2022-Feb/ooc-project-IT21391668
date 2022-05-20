@@ -1,0 +1,59 @@
+//IT21489914 – Wijedasa H.A.S.A
+#include <iostream>
+#include<cstring>
+using namespace std;
+class Profile
+{
+    private:
+      string name;
+      string address;
+      string contactNumber;
+      int No_of_Advertisements;
+      string advertisementStatus;
+
+    public:
+      Profile(string sellerName, string sellerAddress,string                   contactNo, int advertiementsCount, string Status );
+      void displayAdvertisementList();
+      void displayStatus(string advertisementStatus);
+      ~Profile();
+};
+
+Profile:: Profile(string sellerName, string sellerAddress,string                   contactNo, int advertiementsCount, string Status ){
+  strcpy(name,sellerName);
+  strcpy(address,sellerAddress);
+  strcpy(contactNumber,contactNo);
+  No_of_Advertisements = advertisementCount;
+  strcpy(advertisementStatus,Status);
+}
+
+
+int main() {
+
+  Profile prof1("Ajith","No1,Borupana,Rathmalana","0713356734",3,"Posted");
+  
+  
+}
+#include <iostream>
+#include<cstring>
+using namespace std;
+
+class Advertisement
+{
+    private:
+      string advertisementID;
+      string propertyType;
+      float price;
+      string location;
+      string contactNumber;
+      Seller *seller;
+
+    public:
+      Advertisement (string Ad_ID, string P_type, float Price,string Location,string contactNo,Seller *nseller);
+      void generateAdvertisement();
+      void promoteAdvertisment();
+      void updateAdvertisement();
+      ~Advertiement();
+};
+int main() {
+  Advertisement  Ad("12334656898","House",19000000.00,"Malabe","0774567321","Ajith");
+}
