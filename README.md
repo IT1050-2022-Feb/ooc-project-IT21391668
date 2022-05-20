@@ -93,6 +93,7 @@ void requestAppointment();
 void postAdvertisement() ;
 void requestVerification() ;
 void makePayment() ;
+void getAdvertisementList(Profile *PRO) ;
 ~Seller() ;
 
 };
