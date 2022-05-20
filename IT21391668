@@ -109,3 +109,25 @@ phone = m_phone ;
 Seller :: ~Seller(){
 cout << "Deleting Seller" << endl ;
 }
+
+#include <iostream>
+using namespace std ;
+int main () {
+
+string m_username ;
+string m_password ;
+string m_email ; 
+string m_firstName ; 
+string m_lastName ; 
+int m_phone ;
+
+registeredUser R1 ;
+Seller S1 ;
+Buyer B1 ;
+
+R1.registeredUser(string m_username , string m_password , string m_email , string m_fistName . string m_lastName , int m_phone);
+S1.Seller(string m_username , string m_password , string m_email , string m_fistName . string m_lastName , int m_phone);
+B1.Buyer(string m_username , string m_password , string m_email , string m_fistName . string m_lastName , int m_phone);
+
+return 0 ;
+}
