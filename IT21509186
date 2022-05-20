@@ -1,0 +1,100 @@
+//IT21509186
+//H.G.L.R Silva
+//Inheritance between PaymentMethod and paypal 
+#include<iostream>
+#include<cstring>
+using namespace std;
+class PaymentMethod{
+protected:
+char  payMethod_id[20];
+char payMethod_type[20];// Pay Pal
+public:
+//default Constructor
+PaymentMethod()
+{cout<<"PaymentMethod Default Constructor Called"<<endl<<endl;}
+//Overload Constructor
+PaymentMethod(char ppayMethod_id[],char ppayMethod_type[])
+{
+cout<<"PaymentMethod Overload Constructor Called"<<endl<<endl;
+//Setting values
+strcpy(payMethod_id,ppayMethod_id);
+strcpy(payMethod_type,ppayMethod_type);}
+//Display Payment Method Details
+void displayDetails()
+{cout<<"Payment Method ID : "<<payMethod_id<<endl;
+cout<<"Payment Method Type : "<<payMethod_type<<endl<<endl;}
+//destructor01
+~PaymentMethod(){
+cout<<"Delete PaymentMethod Default Constructor "<<endl<<endl;
+}
+};
+class paypal :public PaymentMethod{
+public:
+string user_id; 
+string password;
+int payment_id; 
+public:
+paypal(){
+cout<<"paypal Default Constructor Called"<<endl<<endl;
+}
+paypal(char ppayMethod_id[],char ppayMethod_type[],string puser_id, string ppassword,int ppayment_id)
+{
+cout<<"This is paypal."<<" "<<"derived class from PaymentMethod"<<endl<<endl;
+user_id = puser_id;
+password = ppassword;
+payment_id = ppayment_id;
+}
+void displayDetails(){
+cout<<" User id : "<<user_id<<endl;
+cout<<" password : "<<password<<endl;
+cout<<" Paymemt id"<<payment_id<<endl;}
+~paypal(){
+cout<<"Delete paypal Default Constructor "<<endl<<endl;}
+};
+int main(){ 
+ PaymentMethod P1; //default 
+ PaymentMethod P2("PYPL001","Pay Pal"); //over 
+ P2.displayDetails();
+  
+ paypal mypay1; 
+ paypal mypay2("CD001","credit and Debit","P001","23456789","PAY4567"); 
+ mypay2.displayDetails(); 
+ myPay1.~CreditDebit(); 
+  
+ return 0; 
+}
+
+//Class for Payment
+
+Class Payment{
+
+protected:
+string payment_type;
+string payment_amount ;
+string payment_id ; 
+
+public:
+void displayDetails();
+void displayPayMethod() ;
+void getAdvertisementDetails() ;
+void getPaymentMethods(Payment Method *PAY) ;
+};
+
+void Payment :: getAdvertisementDetails(Advertisement *A){
+details = A-> getAdDetails() ;
+}
+
+
+#include <iostream>
+using namespace std ;
+
+int main () {
+Payment Pay ;
+
+Pay.getPaymentMethods() ;
+Pay.displayPaymentMethods() ;
+Pay.displayDetails() ;
+
+return 0 ;
+
+}
